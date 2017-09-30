@@ -24,7 +24,7 @@ const config = {
     filename: '[name].bundle.js',
     chunkFilename: '[id].[chunkhash].js',
     publicPath: './',
-    sourceMapFilename: '[name].map',
+    sourceMapFilename: 'map/[name].map',
   },
 
   resolve: {
@@ -55,27 +55,6 @@ const config = {
           },
         ],
       },
-      // scss to css
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'postcss-loader', 'sass-loader'],
-        }),
-      },
-      // css loader
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader', {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          'postcss-loader',
-        ],
-      },
       // images chunk
       {
         test: /\.(jpg|png|gif)$/,
@@ -83,7 +62,6 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              limit: 10000,
               name: '[name].[hash:7].[ext]',
               outputPath: 'images/',
             },
